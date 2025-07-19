@@ -1,26 +1,12 @@
 workflows:
-  world_radio_release:
-    name: WorldRadio Release Build
-    max_build_duration: 60
+  debug_build:
+    name: Debug Build
     environment:
       flutter: stable
-      vars:
-        FLUTTER_CHANNEL: stable
-      android_signing:
-        - world_radio_keystore
     scripts:
-      - name: Install dependencies
-        script: |
-          flutter pub get
-      - name: Run tests
-        script: |
-          flutter test
-      - name: Build APK
-        script: |
-          flutter build apk --release
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build debug APK
+        script: flutter build apk --debug
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
-    publishing:
-      email:
-        recipients:
-          - your-email@example.com
+      - build/app/outputs/flutter-apk/app-debug.apk
